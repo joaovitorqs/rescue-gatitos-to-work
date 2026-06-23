@@ -6,6 +6,7 @@ import com.github.joaovitorqs.rescue_gatitos_to_work.dto.RegisterResquestDTO;
 import com.github.joaovitorqs.rescue_gatitos_to_work.model.User;
 import com.github.joaovitorqs.rescue_gatitos_to_work.repository.UserRepository;
 import com.github.joaovitorqs.rescue_gatitos_to_work.security.TokenService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -18,16 +19,12 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/auth")
+@RequiredArgsConstructor
 public class AuthController {
 
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
-    @Autowired
-    private TokenService tokenService;
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final TokenService tokenService;
 
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody LoginRequestDTO body){
