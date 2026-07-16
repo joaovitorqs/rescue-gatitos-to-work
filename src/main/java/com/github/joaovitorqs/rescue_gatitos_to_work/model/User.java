@@ -20,4 +20,9 @@ public class User {
     private String nickName;
     private String email;
     private String password;
+
+    private Integer qtdGatitos;
+    private Double dinheiro;
+    private Integer levelClick;
+    private Integer levelAutoClick;
 }
