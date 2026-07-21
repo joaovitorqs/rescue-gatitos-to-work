@@ -1,4 +1,10 @@
 package com.github.joaovitorqs.rescue_gatitos_to_work.dto;
 
-    public record RegisterResquestDTO(String nickName, String email, String password) {
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
+public record RegisterResquestDTO(@NotBlank String nickName,
+                                  @NotBlank @Email String email,
+                                  @NotBlank @Size(min = 6, max = 100) String password) {
 }
