@@ -22,4 +22,9 @@ public class User {
     private String email;
     @JsonIgnore
     private String password;
+
+    private Integer qtdGatitos;
+    private Double dinheiro;
+    private Integer levelClick;
+    private Integer levelAutoClick;
 }

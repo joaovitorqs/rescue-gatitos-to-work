@@ -1,5 +1,6 @@
 package com.github.joaovitorqs.rescue_gatitos_to_work.controller;
 
+import com.github.joaovitorqs.rescue_gatitos_to_work.dto.GameStateDTO;
 import com.github.joaovitorqs.rescue_gatitos_to_work.dto.LoginRequestDTO;
 import com.github.joaovitorqs.rescue_gatitos_to_work.dto.LoginResponseDTO;
 import com.github.joaovitorqs.rescue_gatitos_to_work.dto.RegisterResquestDTO;
@@ -30,7 +31,10 @@ public class AuthController {
         User user = this.userRepository.findByEmail(body.email()).orElseThrow(() -> new RuntimeException("User not found"));
         if (passwordEncoder.matches(body.password(), user.getPassword())){
             String token = this.tokenService.generateToken(user);
-            return ResponseEntity.ok(new LoginResponseDTO(user.getNickName(), token));
+            GameStateDTO gameState = new GameStateDTO(
+                    user.getQtdGatitos(), user.getDinheiro(),
+                    user.getLevelClick(), user.getLevelAutoClick());
+            return ResponseEntity.ok(new LoginResponseDTO(user.getNickName(), token, gameState));
         } else {
             return ResponseEntity.status(401).body("Invalid credentials");
         }
@@ -45,10 +49,15 @@ public class AuthController {
             newUser.setEmail(body.email());
             newUser.setPassword(passwordEncoder.encode(body.password()));
             newUser.setNickName(body.nickName());
+            newUser.setQtdGatitos(0);
+            newUser.setDinheiro(0.0);
+            newUser.setLevelClick(1);
+            newUser.setLevelAutoClick(0);
             this.userRepository.save(newUser);
 
             String token = this.tokenService.generateToken(newUser);
-            return ResponseEntity.ok(new LoginResponseDTO(newUser.getNickName(), token));
+            GameStateDTO gameState = new GameStateDTO(0, 0.0, 1, 0);
+            return ResponseEntity.ok(new LoginResponseDTO(newUser.getNickName(), token, gameState));
         } else {
             return ResponseEntity.status(400).body("Email already in use");
         }
