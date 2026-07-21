@@ -1,5 +1,6 @@
 package com.github.joaovitorqs.rescue_gatitos_to_work.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,5 +20,6 @@ public class User {
 
     private String nickName;
     private String email;
+    @JsonIgnore
     private String password;
 }
