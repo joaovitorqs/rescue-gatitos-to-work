@@ -7,7 +7,6 @@ import com.github.joaovitorqs.rescue_gatitos_to_work.model.User;
 import com.github.joaovitorqs.rescue_gatitos_to_work.repository.UserRepository;
 import com.github.joaovitorqs.rescue_gatitos_to_work.security.TokenService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
